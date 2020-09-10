@@ -14,7 +14,7 @@ class ValidationTest extends Component {
             re_password : Yup.string().required('masukan ulang Kata sandi').oneOf([Yup.ref('password'), null], 'Kata sandi tidak sama'),
         })
         const initialValues = {
-            username : '',
+            username : 'kemal',
             email : '',
             password : '',
             re_password: ''
@@ -36,8 +36,8 @@ class ValidationTest extends Component {
                                 name="username"
                                 placeholder='Masukan Username'
                                 value={values.username}
-                                onChange={handleChange('username')}
-                                onBlur={handleBlur('username')}
+                                onChange={handleChange}
+                                onBlur={handleBlur}
                                 />
                                 <p className='error'>
                                     {touched.username && errors.username}
@@ -48,8 +48,8 @@ class ValidationTest extends Component {
                                 name="email"
                                 placeholder='Masukan Email'
                                 value={values.email}
-                                onChange={handleChange('email')}
-                                onBlur={handleBlur('email')}
+                                onChange={handleChange}
+                                onBlur={handleBlur}
                                 />
                                 <p className='error'>
                                     {touched.email && errors.email}
@@ -60,8 +60,8 @@ class ValidationTest extends Component {
                                 name="password"
                                 placeholder='Masukan password'
                                 value={values.password}
-                                onChange={handleChange('password')}
-                                onBlur={handleBlur('password')}
+                                onChange={handleChange}
+                                onBlur={handleBlur}
                                 />
                                 <p className='error'>
                                     {touched.password && errors.password}
@@ -72,8 +72,8 @@ class ValidationTest extends Component {
                                 name="re_password"
                                 placeholder='Masukan ulang password'
                                 value={values.re_password}
-                                onChange={handleChange('re_password')}
-                                onBlur={handleBlur('re_password')}
+                                onChange={handleChange}
+                                onBlur={handleBlur}
                                 />
                                 <p className='error'>
                                     {touched.re_password && errors.re_password}
@@ -85,6 +85,7 @@ class ValidationTest extends Component {
                                 <pre>
                                     {JSON.stringify(values, null, 2)}
                                 </pre>
+                                
                             </form>
                         )}
 
