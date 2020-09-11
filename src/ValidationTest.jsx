@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 
-import {Formik} from 'formik'
+import {Formik, Field} from 'formik'
 import * as Yup from 'yup'
 import Select from 'react-select';
 import Switch from "react-switch";
-// import { TextField } from '@material-ui/core';
+// import { TextField, Radio } from '@material-ui/core';
 
 
 class ValidationTest extends Component {
@@ -22,7 +22,8 @@ class ValidationTest extends Component {
             flavour : Yup.string().nullable().required(),
             term : Yup.bool().required().oneOf([true], "The terms and conditions must be accepted."),
             drink : Yup.array().max(2, 'maksimal 2').min(1, 'minimal 1'),
-            gender : Yup.string().required('gender harus di isi')
+            gender : Yup.string().required('gender harus di isi'),
+            basicSelect : Yup.string().required()
 
         })
         const initialValues = {
@@ -33,7 +34,8 @@ class ValidationTest extends Component {
             flavour : null,
             term : false,
             drink : [],
-            gender : ''
+            gender : '',
+            basicSelect : ''
         }
         return (
             <div>
@@ -96,6 +98,17 @@ class ValidationTest extends Component {
                                     {touched.re_password && errors.re_password}
                                 </p>
 
+                                <p>BASIC SELECT</p>
+                                <select value={values.basicSelect} name='basicSelect' onChange={handleChange}>
+                                    <option value="grapefruit">Grapefruit</option>
+                                    <option value="lime">Lime</option>
+                                    <option value="coconut">Coconut</option>
+                                    <option value="mango">Mango</option>
+                                </select>
+
+
+                                <p>SELECT WITH OBJECT</p>
+
                                 <Select
                                     value={values.flavour}
                                     onChange={val => setFieldValue('flavour', val)}
@@ -144,6 +157,12 @@ class ValidationTest extends Component {
                                     <input type="radio" value="Female" name="gender" /> Female
                                     <input type="radio" value="Other" name="gender" /> Other
                                 </div>
+
+                                  {/* using field no need handle change and value*/}
+                                  {/* <Field as={Radio} type="radio" value="Male" name="gender" /> Male
+                                    <Field as={Radio} type="radio" value="Female" name="gender" /> Female
+                                    <Field as={Radio} type="radio" value="Other" name="gender" /> Other */}
+
                                 <p className='error'>
                                     {touched.gender && errors.gender}
                                 </p>
