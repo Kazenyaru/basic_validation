@@ -19,11 +19,11 @@ class ValidationTest extends Component {
             email : Yup.string().required().email(),
             password : Yup.string().required().matches(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/, 'Must Contain 8 Characters, One Number and one special case Character'),
             re_password : Yup.string().required('masukan ulang Kata sandi').oneOf([Yup.ref('password'), null], 'Kata sandi tidak sama'),
-            flavour : Yup.string().nullable().required(),
-            term : Yup.bool().required().oneOf([true], "The terms and conditions must be accepted."),
             drink : Yup.array().max(2, 'maksimal 2').min(1, 'minimal 1'),
             gender : Yup.string().required('gender harus di isi'),
-            basicSelect : Yup.string().required()
+            basicSelect : Yup.string().required(),
+            term : Yup.bool().required().oneOf([true], "The terms and conditions must be accepted."),
+            flavour : Yup.string().nullable().required(),
 
         })
         const initialValues = {
@@ -105,6 +105,9 @@ class ValidationTest extends Component {
                                     <option value="coconut">Coconut</option>
                                     <option value="mango">Mango</option>
                                 </select>
+                                <p className='error'>
+                                    {touched.basicSelect && errors.basicSelect}
+                                </p>
 
 
                                 <p>SELECT WITH OBJECT</p>
@@ -157,15 +160,15 @@ class ValidationTest extends Component {
                                     <input type="radio" value="Female" name="gender" /> Female
                                     <input type="radio" value="Other" name="gender" /> Other
                                 </div>
+                                  <p className='error'>
+                                      {touched.gender && errors.gender}
+                                  </p>
 
                                   {/* using field no need handle change and value*/}
                                   {/* <Field as={Radio} type="radio" value="Male" name="gender" /> Male
                                     <Field as={Radio} type="radio" value="Female" name="gender" /> Female
                                     <Field as={Radio} type="radio" value="Other" name="gender" /> Other */}
 
-                                <p className='error'>
-                                    {touched.gender && errors.gender}
-                                </p>
 
                                 <p>TERM AND CONDITION</p>
                                 <Switch 
